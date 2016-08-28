@@ -1,0 +1,18 @@
+{
+  "name": "leaderboards",
+  "description": "Wakatime leaderboards for Simian.",
+  "main": "",
+  "authors": [
+    "Nicolás Saiz"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "wakatime"
+  ],
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}

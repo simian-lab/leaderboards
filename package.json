@@ -1,0 +1,21 @@
+{
+  "name": "leaderboards",
+  "version": "1.0.0",
+  "description": "Wakatime leaderboards for Simian.",
+  "keywords": [
+    "wakatime"
+  ],
+  "author": "Nicolás Saiz",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "connect-history-api-fallback": "^1.3.0",
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.8",
+    "request": "^2.74.0"
+  }
+}

@@ -1,0 +1,21 @@
+<div class="home">
+
+  <table class="table">
+    <tr>
+      <th>Nombre</th>
+      <th>Usuario</th>
+      <th>Promedio</th>
+      <th>Total</th>
+    </tr>
+    <tr ng-repeat="user in users">
+      <td>{{user.name}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.wakatime_data.human_readable_daily_average}}</td>
+      <td>{{user.wakatime_data.human_readable_total}}</td>
+    </tr>
+  </table>
+
+  <p ng-show="addingUser">Añadiendo usuario...</p>
+
+  <a href="https://wakatime.com/oauth/authorize?client_id=7bmDr69y524GFBlipPr3nSD8&response_type=code&scope=read_logged_time&redirect_uri=http://localhost:5000/">Add Simian</a>
+</div>
