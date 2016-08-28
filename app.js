@@ -11,7 +11,7 @@ var app = express();
 // MongoDB Node.js Driver Documentation: http://mongodb.github.io/node-mongodb-native/2.2/
 var mongoUrl = process.env.MONGODB_URI;
 
-app.use(express.static('dev'));
+app.use(express.static('prod'));
 
 app.get('/get-token/:code', function(req, res) {
   var postOptions, userCode;
