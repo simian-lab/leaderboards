@@ -2,6 +2,7 @@ angular.module('leaderboards', [
 
   'ui.router',
 
+  'leaderboards.config',
   'leaderboards.auth',
   'leaderboards.home',
   'leaderboards.users',
