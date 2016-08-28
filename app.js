@@ -1,11 +1,15 @@
+var dotEnv = require('dotenv').config();
 var express = require('express');
 var mongoClient = require('mongodb').MongoClient;
 var request = require('request');
 
 var app = express();
 
+/* For your local environment start first MongoDB with:
+  mongod --dbpath /path/to/your/database */
+
 // MongoDB Node.js Driver Documentation: http://mongodb.github.io/node-mongodb-native/2.2/
-var mongoUrl = 'mongodb://localhost:27017/leaderboards';
+var mongoUrl = process.env.MONGODB_URI;
 
 app.use(express.static('dev'));
 
@@ -17,9 +21,9 @@ app.get('/get-token/:code', function(req, res) {
   postOptions = {
     url: 'https://wakatime.com/oauth/token',
     form: {
-      'client_id': 'YOUR_CLIENT_ID',
-      'client_secret': 'YOUR_CLIENT_SECRET',
-      'redirect_uri': 'http://localhost:5000/',
+      'client_id': process.env.WAKATIME_APP_ID,
+      'client_secret': process.env.WAKATIME_APP_SECRET,
+      'redirect_uri': process.env.REDIRECT_URI,
       'grant_type': 'authorization_code',
       'code': userCode
     }
