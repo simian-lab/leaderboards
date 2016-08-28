@@ -84,6 +84,7 @@ app.get('/get-users/', function(req, res) {
   mongoClient.connect(mongoUrl, function(error, db) {
     db.collection('users').find().toArray(function(error, response) {
       res.send(response);
+      db.close();
     });
   });
 });
