@@ -3,11 +3,16 @@
 angular.module('leaderboards.home', [])
 
 .controller('HomeController', [
-  '$location', '$scope', '$state', 'AuthService', 'UsersService', 'WakatimeService',
-  function($location, $scope, $state, AuthService, UsersService, WakatimeService) {
+  '$location', '$scope', '$state', 'AuthService', 'UsersService', 'WakatimeService', 'CLIENT_ID', 'REDIRECT_URI',
+  function($location, $scope, $state, AuthService, UsersService, WakatimeService, CLIENT_ID, REDIRECT_URI) {
     var userCode;
 
     $scope.addingUser = false;
+
+    $scope.authorizeUrl = 'https://wakatime.com/oauth/authorize?client_id=' +
+    CLIENT_ID +
+    '&response_type=code&scope=read_logged_time&redirect_uri=' +
+    REDIRECT_URI;
 
     if ($location.search().code !== undefined) {
 
