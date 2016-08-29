@@ -1,8 +1,28 @@
 {
   "users": [
     {
+      "name": "Ivan Vásquez",
+      "username": "ivancamilov"
+    },
+    {
+      "name": "David Guzmán",
+      "username": "davidguzman"
+    },
+    {
+      "name": "Johnny Chinchajoa",
+      "username": "johnny_simian"
+    },
+    {
       "name": "Nicolás Saiz",
       "username": "nicolasaiz173"
+    },
+    {
+      "name": "Pablo García",
+      "username": "pagarciag"
+    },
+    {
+      "name": "Sebastián Giraldo",
+      "username": "Zheiran"
     }
   ]
 }
