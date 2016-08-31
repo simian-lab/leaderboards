@@ -59,17 +59,53 @@ angular.module('leaderboards.home', [])
       tokens = response;
 
       UsersService.getUsers().then(function(response) {
-        $scope.users = response.users;
+        var users, usersAdded;
+
+        users = response.users;
+        usersAdded = 0;
 
         angular.forEach(tokens, function(token) {
           WakatimeService.getUserInfo(token.access_token).then(function(response) {
-            for (var i = 0; i < $scope.users.length; i++) {
-              if($scope.users[i].username == response.data.username) {
-                $scope.users[i].wakatime_data = response.data;
+            var languages;
+
+            for (var i = 0; i < users.length; i++) {
+              if(users[i].username == response.data.username) {
+                users[i].wakatime_data = response.data;
+
+                languages = '';
+
+                for (var j = 0; j < response.data.languages.length; j++) {
+                  if (j === response.data.languages.length - 1) {
+                    languages = languages + response.data.languages[j].name;
+                  }
+                  else {
+                    languages = languages + response.data.languages[j].name + ', ';
+                  }
+                }
+
+                users[i].languages = languages;
+
+                usersAdded = usersAdded + 1;
+
+                if (usersAdded === users.length) {
+                  users.sort(function(a, b) {
+                    if (a.wakatime_data.total_seconds > b.wakatime_data.total_seconds) {
+                      return -1;
+                    }
+
+                    if (a.wakatime_data.total_seconds < b.wakatime_data.total_seconds) {
+                      return 1;
+                    }
+
+                    return 0;
+                  });
+                }
               }
             }
           });
         });
+
+        $scope.users = users;
       });
     });
   }
