@@ -59,9 +59,10 @@ angular.module('leaderboards.home', [])
       tokens = response;
 
       UsersService.getUsers().then(function(response) {
-        var users;
+        var users, usersAdded;
 
         users = response.users;
+        usersAdded = 0;
 
         angular.forEach(tokens, function(token) {
           WakatimeService.getUserInfo(token.access_token).then(function(response) {
@@ -83,6 +84,22 @@ angular.module('leaderboards.home', [])
                 }
 
                 users[i].languages = languages;
+
+                usersAdded = usersAdded + 1;
+
+                if (usersAdded === users.length) {
+                  users.sort(function(a, b) {
+                    if (a.wakatime_data.total_seconds > b.wakatime_data.total_seconds) {
+                      return -1;
+                    }
+
+                    if (a.wakatime_data.total_seconds < b.wakatime_data.total_seconds) {
+                      return 1;
+                    }
+
+                    return 0;
+                  });
+                }
               }
             }
           });
