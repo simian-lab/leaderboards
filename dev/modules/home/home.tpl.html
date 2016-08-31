@@ -3,15 +3,15 @@
   <table class="table">
     <tr>
       <th>Nombre</th>
-      <th>Usuario</th>
       <th>Promedio</th>
       <th>Total</th>
+      <th>Lenguajes</th>
     </tr>
     <tr ng-repeat="user in users">
       <td>{{user.name}}</td>
-      <td>{{user.username}}</td>
       <td>{{user.wakatime_data.human_readable_daily_average}}</td>
       <td>{{user.wakatime_data.human_readable_total}}</td>
+      <td>{{user.languages}}</td>
     </tr>
   </table>
 
