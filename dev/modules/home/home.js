@@ -66,12 +66,13 @@ angular.module('leaderboards.home', [])
 
         angular.forEach(tokens, function(token) {
           WakatimeService.getUserInfo(token.access_token).then(function(response) {
-            var languages;
+            var editors, languages;
 
             for (var i = 0; i < users.length; i++) {
               if(users[i].username == response.data.username) {
                 users[i].wakatime_data = response.data;
 
+                editors = '';
                 languages = '';
 
                 for (var j = 0; j < response.data.languages.length; j++) {
@@ -84,6 +85,17 @@ angular.module('leaderboards.home', [])
                 }
 
                 users[i].languages = languages;
+
+                for (var j = 0; j < response.data.editors.length; j++) {
+                  if (j === response.data.editors.length - 1) {
+                    editors = editors + response.data.editors[j].name;
+                  }
+                  else {
+                    editors = editors + response.data.editors[j].name + ', ';
+                  }
+                }
+
+                users[i].editors = editors;
 
                 usersAdded = usersAdded + 1;
 
