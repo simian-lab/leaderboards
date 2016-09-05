@@ -7,6 +7,7 @@
       <th>Promedio</th>
       <th>Total</th>
       <th>Lenguajes</th>
+      <th>Editores</th>
     </tr>
     <tr ng-repeat="user in users">
       <td>{{$index + 1}}</td>
@@ -14,6 +15,7 @@
       <td>{{user.wakatime_data.human_readable_daily_average}}</td>
       <td>{{user.wakatime_data.human_readable_total}}</td>
       <td>{{user.languages}}</td>
+      <td>{{user.editors}}</td>
     </tr>
   </table>
 
