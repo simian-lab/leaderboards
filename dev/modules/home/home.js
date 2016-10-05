@@ -8,11 +8,12 @@ angular.module('leaderboards.home', [])
     var userCode;
 
     $scope.addingUser = false;
-
-    $scope.authorizeUrl = 'https://wakatime.com/oauth/authorize?client_id=' +
-    CLIENT_ID +
-    '&response_type=code&scope=read_logged_time&redirect_uri=' +
-    REDIRECT_URI;
+    $scope.bananaFactor = 2;
+    $scope.authorizeUrl =
+      'https://wakatime.com/oauth/authorize?client_id=' +
+      CLIENT_ID +
+      '&response_type=code&scope=read_logged_time&redirect_uri=' +
+      REDIRECT_URI;
 
     if ($location.search().code !== undefined) {
 
