@@ -1,15 +1,22 @@
-var dotEnv = require('dotenv').config();
-var express = require('express');
-var mongoClient = require('mongodb').MongoClient;
-var request = require('request');
-
-var app = express();
+var dotEnv      = require('dotenv').config(),
+    express     = require('express'),
+    mongoClient = require('mongodb').MongoClient,
+    request     = require('request'),
+    queryString = require('querystring'),
+    app         = express();
 
 /* For your local environment start first MongoDB with:
   mongod --dbpath /path/to/your/database */
 
 // MongoDB Node.js Driver Documentation: http://mongodb.github.io/node-mongodb-native/2.2/
 var mongoUrl = process.env.MONGODB_URI;
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.use(express.static('prod'));
 
@@ -27,7 +34,7 @@ app.get('/get-token/:code', function(req, res) {
       'grant_type': 'authorization_code',
       'code': userCode
     }
-  }
+  };
 
   function callback(error, response, body) {
     res.send(body);
@@ -91,6 +98,21 @@ app.get('/get-users/', function(req, res) {
       db.close();
     });
   });
+});
+
+app.get('/last_7_days_stats/', function(req, res) {
+
+  var callback = function(error, response, body) {
+    res.send(body);
+  };
+
+  var requestURL =
+    'https://wakatime.com/api/v1/users/current/stats/last_7_days?' +
+    queryString.stringify({ access_token: req.query.access_token });
+
+  console.log(requestURL);
+
+  request.get(requestURL, callback);
 });
 
 app.listen(process.env.PORT || 5000, function () {

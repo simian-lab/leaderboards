@@ -8,11 +8,12 @@ angular.module('leaderboards.home', [])
     var userCode;
 
     $scope.addingUser = false;
-
-    $scope.authorizeUrl = 'https://wakatime.com/oauth/authorize?client_id=' +
-    CLIENT_ID +
-    '&response_type=code&scope=read_logged_time&redirect_uri=' +
-    REDIRECT_URI;
+    $scope.bananaFactor = 2;
+    $scope.authorizeUrl =
+      'https://wakatime.com/oauth/authorize?client_id=' +
+      CLIENT_ID +
+      '&response_type=code&scope=read_logged_time&redirect_uri=' +
+      REDIRECT_URI;
 
     if ($location.search().code !== undefined) {
 
@@ -66,14 +67,15 @@ angular.module('leaderboards.home', [])
 
         angular.forEach(tokens, function(token) {
           WakatimeService.getUserInfo(token.access_token).then(function(response) {
-            var editors, languages;
+            var editors, languages, projects;
 
             for (var i = 0; i < users.length; i++) {
               if(users[i].username == response.data.username) {
                 users[i].wakatime_data = response.data;
 
-                editors = '';
+                editors   = '';
                 languages = '';
+                projects  = '';
 
                 for (var j = 0; j < response.data.languages.length; j++) {
                   if (j === response.data.languages.length - 1) {
@@ -96,6 +98,17 @@ angular.module('leaderboards.home', [])
                 }
 
                 users[i].editors = editors;
+
+                for (var j = 0; j < response.data.projects.length; j++) {
+                  if (j === response.data.projects.length - 1) {
+                    projects = projects + response.data.projects[j].name;
+                  }
+                  else {
+                    projects = projects + response.data.projects[j].name + ', ';
+                  }
+                }
+
+                users[i].projects = projects;
 
                 usersAdded = usersAdded + 1;
 

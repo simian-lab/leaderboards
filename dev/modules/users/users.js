@@ -3,8 +3,8 @@
 angular.module('leaderboards.users', [])
 
 .factory('UsersService', [
-  '$http', '$q',
-  function($http, $q) {
+  '$http', '$q', 'REDIRECT_URI',
+  function($http, $q, REDIRECT_URI) {
     return {
       getUsers: function() {
         var deferred;
@@ -22,7 +22,7 @@ angular.module('leaderboards.users', [])
 
         deferred = $q.defer();
 
-        $http.get('/get-users').then(function(response) {
+        $http.get(REDIRECT_URI + 'get-users').then(function(response) {
           deferred.resolve(response.data);
         });
 

@@ -25,7 +25,6 @@ angular.module('leaderboards', [
 .controller('AppController', [
   '$scope',
   function($scope) {
-    console.log('AppController');
   }
 ])
 ;
