@@ -3,8 +3,8 @@
 angular.module('leaderboards.wakatime', [])
 
 .factory('WakatimeService', [
-  '$http', '$q',
-  function($http, $q) {
+  '$http', '$q', 'REDIRECT_URI',
+  function($http, $q, REDIRECT_URI) {
     return {
       getUserInfo: function(accessToken) {
         var deferred, requestConfig;
@@ -13,11 +13,14 @@ angular.module('leaderboards.wakatime', [])
 
         requestConfig = {
           method: 'GET',
-          url: 'http://crossorigin.me/https://wakatime.com/api/v1/users/current/stats/last_7_days?access_token=' + accessToken,
+          url: REDIRECT_URI + 'last_7_days_stats?access_token=' + accessToken,
         }
 
         $http(requestConfig).then(function(response) {
           deferred.resolve(response.data);
+        },
+        function(error) {
+          deferred.reject('request to WakaTime couldn\'t be completed.');
         });
 
         return deferred.promise;
