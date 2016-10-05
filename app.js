@@ -1,9 +1,9 @@
-var dotEnv = require('dotenv').config();
-var express = require('express');
-var mongoClient = require('mongodb').MongoClient;
-var request = require('request');
-
-var app = express();
+var dotEnv      = require('dotenv').config(),
+    express     = require('express'),
+    mongoClient = require('mongodb').MongoClient,
+    request     = require('request'),
+    queryString = require('querystring'),
+    app         = express();
 
 /* For your local environment start first MongoDB with:
   mongod --dbpath /path/to/your/database */
