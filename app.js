@@ -34,7 +34,7 @@ app.get('/get-token/:code', function(req, res) {
       'grant_type': 'authorization_code',
       'code': userCode
     }
-  }
+  };
 
   function callback(error, response, body) {
     res.send(body);
@@ -98,6 +98,21 @@ app.get('/get-users/', function(req, res) {
       db.close();
     });
   });
+});
+
+app.get('/last_7_days_stats/', function(req, res) {
+
+  var callback = function(error, response, body) {
+    res.send(body);
+  };
+
+  var requestURL =
+    'https://wakatime.com/api/v1/users/current/stats/last_7_days?' +
+    queryString.stringify({ access_token: req.query.access_token });
+
+  console.log(requestURL);
+
+  request.get(requestURL, callback);
 });
 
 app.listen(process.env.PORT || 5000, function () {
